@@ -1,0 +1,1960 @@
+[
+    {
+        "id": "70bfac397f8bc5cd",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "88e20bbbf84f03b2",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 120,
+        "y": 60,
+        "wires": [
+            [
+                "f154048fc40ea603"
+            ]
+        ]
+    },
+    {
+        "id": "c504b6e1f3b4ddfd",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "f0e577b8a9ab4634"
+            ]
+        ]
+    },
+    {
+        "id": "f154048fc40ea603",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 340,
+        "y": 60,
+        "wires": [
+            [
+                "126fa552ae7f96f6"
+            ]
+        ]
+    },
+    {
+        "id": "f0e577b8a9ab4634",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "8f091041754ccb03"
+            ]
+        ]
+    },
+    {
+        "id": "126fa552ae7f96f6",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "motion1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 60,
+        "wires": [
+            [
+                "3078c92e928c3cdc"
+            ]
+        ]
+    },
+    {
+        "id": "8f091041754ccb03",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sound1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 180,
+        "wires": [
+            [
+                "3078c92e928c3cdc"
+            ]
+        ]
+    },
+    {
+        "id": "3078c92e928c3cdc",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 11",
+        "func": "var motion1=flow.get('motion1')||0;\nconsole.log('Motion1 ',motion1);\nvar sound1=flow.get('sound1')||0;\nconsole.log('Sound1 ',sound1);\nif(motion1>7 && sound1>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 100,
+        "wires": [
+            [
+                "64a0a0895d2ecba4"
+            ]
+        ]
+    },
+    {
+        "id": "8a4e555585afd8b5",
+        "type": "debug",
+        "z": "70bfac397f8bc5cd",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 3940,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "285337efe3cbd810",
+        "type": "pythonshell in",
+        "z": "70bfac397f8bc5cd",
+        "name": "Camera Input 1",
+        "pyfile": "C:\\Users\\aayus\\.node-red\\pro5.py",
+        "virtualenv": "",
+        "continuous": false,
+        "stdInData": false,
+        "x": 2360,
+        "y": 400,
+        "wires": [
+            [
+                "eb703c24ea4f069c"
+            ]
+        ]
+    },
+    {
+        "id": "413793a2c152bebc",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 120,
+        "y": 420,
+        "wires": [
+            [
+                "c5fc0a8737de6898"
+            ]
+        ]
+    },
+    {
+        "id": "52da2a2814467d5b",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "ea473dd5e085e786"
+            ]
+        ]
+    },
+    {
+        "id": "c5fc0a8737de6898",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 340,
+        "y": 420,
+        "wires": [
+            [
+                "83bffbd359fd63b1"
+            ]
+        ]
+    },
+    {
+        "id": "ea473dd5e085e786",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 360,
+        "y": 540,
+        "wires": [
+            [
+                "39490a47f3b8c99e"
+            ]
+        ]
+    },
+    {
+        "id": "83bffbd359fd63b1",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "motion2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 420,
+        "wires": [
+            [
+                "67ec32ea7a4120a5"
+            ]
+        ]
+    },
+    {
+        "id": "39490a47f3b8c99e",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sound2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 540,
+        "wires": [
+            [
+                "67ec32ea7a4120a5"
+            ]
+        ]
+    },
+    {
+        "id": "67ec32ea7a4120a5",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 12",
+        "func": "var motion2=flow.get('motion2')||0;\nconsole.log('Motion2 ',motion2);\nvar sound2=flow.get('sound2')||0;\nconsole.log('Sound2 ',sound2);\nif(motion2>7 && sound2>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 460,
+        "wires": [
+            [
+                "64a0a0895d2ecba4"
+            ]
+        ]
+    },
+    {
+        "id": "ff60c8120b48854f",
+        "type": "pythonshell in",
+        "z": "70bfac397f8bc5cd",
+        "name": "Camera Input 2",
+        "pyfile": "C:\\Users\\aayus\\.node-red\\pro5.py",
+        "virtualenv": "",
+        "continuous": false,
+        "stdInData": false,
+        "x": 2420,
+        "y": 920,
+        "wires": [
+            [
+                "34ee3fa6bffefee8"
+            ]
+        ]
+    },
+    {
+        "id": "eb703c24ea4f069c",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 13",
+        "func": "let lastTwoLines='';\nconst text=msg.payload;\nlet numLines=2;\nif(text.slice(-5)=='False'){\n    numLines=1\n}\nlastTwoLines = text.split('\\n').slice(-numLines).join('\\n');\nreturn {'payload':lastTwoLines,'source':'Camera Input 1'};\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2590,
+        "y": 400,
+        "wires": [
+            [
+                "8a4e555585afd8b5",
+                "b5422ec9247ddab0",
+                "228312c81c4dddf9"
+            ]
+        ]
+    },
+    {
+        "id": "34ee3fa6bffefee8",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 14",
+        "func": "let lastTwoLines='';\nconst text=msg.payload;\nlet numLines=2;\nif(text.slice(-5)=='False'){\n    numLines=1\n}\nlastTwoLines = text.split('\\n').slice(-numLines).join('\\n');\nreturn {'payload':lastTwoLines, 'source':'Camera Input 2'};\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2590,
+        "y": 720,
+        "wires": [
+            [
+                "8a4e555585afd8b5",
+                "b5422ec9247ddab0",
+                "228312c81c4dddf9"
+            ]
+        ]
+    },
+    {
+        "id": "b6bf22bebdfd0a45",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 460,
+        "y": 1340,
+        "wires": [
+            [
+                "fed24622c88f7d1f"
+            ]
+        ]
+    },
+    {
+        "id": "34cc9f5b889f3729",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 470,
+        "y": 1460,
+        "wires": [
+            [
+                "5f0247dc1bea30d0"
+            ]
+        ]
+    },
+    {
+        "id": "fed24622c88f7d1f",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 680,
+        "y": 1340,
+        "wires": [
+            [
+                "e98c7b8fb0eab873"
+            ]
+        ]
+    },
+    {
+        "id": "5f0247dc1bea30d0",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 700,
+        "y": 1460,
+        "wires": [
+            [
+                "ef160235f16743d2"
+            ]
+        ]
+    },
+    {
+        "id": "e98c7b8fb0eab873",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "motion3",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 1340,
+        "wires": [
+            [
+                "0f584a75758fd5e4"
+            ]
+        ]
+    },
+    {
+        "id": "ef160235f16743d2",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sound3",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 1460,
+        "wires": [
+            [
+                "0f584a75758fd5e4"
+            ]
+        ]
+    },
+    {
+        "id": "0f584a75758fd5e4",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 15",
+        "func": "var motion3=flow.get('motion3')||0;\nconsole.log('Motion3 ',motion3);\nvar sound3=flow.get('sound3')||0;\nconsole.log('Sound3 ',sound3);\nif(motion3>7 && sound3>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1380,
+        "wires": [
+            [
+                "5c3370553f3bb0a2"
+            ]
+        ]
+    },
+    {
+        "id": "60629bad2273eb53",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 460,
+        "y": 1700,
+        "wires": [
+            [
+                "94286675964d0a8b"
+            ]
+        ]
+    },
+    {
+        "id": "81f59ba5990ce40d",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 470,
+        "y": 1820,
+        "wires": [
+            [
+                "10a8f685f6f3c638"
+            ]
+        ]
+    },
+    {
+        "id": "94286675964d0a8b",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 680,
+        "y": 1700,
+        "wires": [
+            [
+                "98798ba0f996d8e3"
+            ]
+        ]
+    },
+    {
+        "id": "10a8f685f6f3c638",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 700,
+        "y": 1820,
+        "wires": [
+            [
+                "849d5bcd74575236"
+            ]
+        ]
+    },
+    {
+        "id": "98798ba0f996d8e3",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "motion4",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 1700,
+        "wires": [
+            [
+                "77ea65017063a330"
+            ]
+        ]
+    },
+    {
+        "id": "849d5bcd74575236",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sound4",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 880,
+        "y": 1820,
+        "wires": [
+            [
+                "77ea65017063a330"
+            ]
+        ]
+    },
+    {
+        "id": "64a0a0895d2ecba4",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 19",
+        "func": "console.log(msg.payload+'***'+'1');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1590,
+        "y": 400,
+        "wires": [
+            [
+                "285337efe3cbd810"
+            ]
+        ]
+    },
+    {
+        "id": "77ea65017063a330",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 16",
+        "func": "var motion4=flow.get('motion4')||0;\nconsole.log('Motion4 ',motion4);\nvar sound4=flow.get('sound4')||0;\nconsole.log('Sound4 ',sound4);\nif(motion4>7 && sound4>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 1740,
+        "wires": [
+            [
+                "5c3370553f3bb0a2"
+            ]
+        ]
+    },
+    {
+        "id": "5c3370553f3bb0a2",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 20",
+        "func": "console.log(msg.payload+'***'+'2');\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1390,
+        "y": 1580,
+        "wires": [
+            [
+                "ff60c8120b48854f"
+            ]
+        ]
+    },
+    {
+        "id": "d8e6a49b471dc1b5",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 280,
+        "y": 680,
+        "wires": [
+            [
+                "91f4ca35f23373d3"
+            ]
+        ]
+    },
+    {
+        "id": "a19de89e1e4ee727",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Door and Window Contact Sensor Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 250,
+        "y": 800,
+        "wires": [
+            [
+                "660b6f5e93fe5cc6"
+            ]
+        ]
+    },
+    {
+        "id": "91f4ca35f23373d3",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 560,
+        "y": 680,
+        "wires": [
+            [
+                "8d675866bbbaa268"
+            ]
+        ]
+    },
+    {
+        "id": "660b6f5e93fe5cc6",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W_Contact_Sensor Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 580,
+        "y": 800,
+        "wires": [
+            [
+                "9895100629553c78"
+            ]
+        ]
+    },
+    {
+        "id": "8d675866bbbaa268",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Tempearture1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temperature1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 680,
+        "wires": [
+            [
+                "33f64ab47e809af4"
+            ]
+        ]
+    },
+    {
+        "id": "9895100629553c78",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "dandw1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 800,
+        "wires": [
+            [
+                "33f64ab47e809af4"
+            ]
+        ]
+    },
+    {
+        "id": "33f64ab47e809af4",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 21",
+        "func": "var temperature1=flow.get('temperature1')||0;\nconsole.log('Temperature1',temperature1);\nvar dandw1=flow.get('dandw1')||0;\nconsole.log('D&W1',dandw1);\nif(temperature1>7 && dandw1>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1050,
+        "y": 720,
+        "wires": [
+            [
+                "64a0a0895d2ecba4"
+            ]
+        ]
+    },
+    {
+        "id": "375739584e958da0",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 520,
+        "y": 1960,
+        "wires": [
+            [
+                "8eb0f01a0f58da84"
+            ]
+        ]
+    },
+    {
+        "id": "189067873e69698f",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Door and Window Contact Sensor Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 490,
+        "y": 2080,
+        "wires": [
+            [
+                "b4e9b9748a0792f6"
+            ]
+        ]
+    },
+    {
+        "id": "8eb0f01a0f58da84",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 800,
+        "y": 1960,
+        "wires": [
+            [
+                "97f6ca17390c82ed"
+            ]
+        ]
+    },
+    {
+        "id": "b4e9b9748a0792f6",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W_Contact_Sensor Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 820,
+        "y": 2080,
+        "wires": [
+            [
+                "a90bcd43e9325d10"
+            ]
+        ]
+    },
+    {
+        "id": "97f6ca17390c82ed",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Tempearture2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temperature2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 1960,
+        "wires": [
+            [
+                "82e7e0ed27679866"
+            ]
+        ]
+    },
+    {
+        "id": "a90bcd43e9325d10",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "dandw2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 2080,
+        "wires": [
+            [
+                "82e7e0ed27679866"
+            ]
+        ]
+    },
+    {
+        "id": "82e7e0ed27679866",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 22",
+        "func": "var temperature2=flow.get('temperature2')||0;\nconsole.log('Temperature2',temperature2);\nvar dandw2=flow.get('dandw2')||0;\nconsole.log('D&W2',dandw2);\nif(temperature2>7 && dandw2>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 2000,
+        "wires": [
+            [
+                "5c3370553f3bb0a2"
+            ]
+        ]
+    },
+    {
+        "id": "6a22501928b018de",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "LightLevelSensors",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 1350,
+        "y": 2400,
+        "wires": [
+            [
+                "e3453093c0c8866e"
+            ]
+        ]
+    },
+    {
+        "id": "e3453093c0c8866e",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Light Level Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1380,
+        "y": 2200,
+        "wires": [
+            [
+                "9267b7066fbc0e49"
+            ]
+        ]
+    },
+    {
+        "id": "9267b7066fbc0e49",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Light1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "light1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1430,
+        "y": 2080,
+        "wires": [
+            [
+                "ef9122ab80a39bee"
+            ]
+        ]
+    },
+    {
+        "id": "3d0e58cd499221f2",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 1640,
+        "y": 2400,
+        "wires": [
+            [
+                "1da163291e3e6cc3"
+            ]
+        ]
+    },
+    {
+        "id": "1da163291e3e6cc3",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 1720,
+        "y": 2240,
+        "wires": [
+            [
+                "c58d21b80851fa3c"
+            ]
+        ]
+    },
+    {
+        "id": "c58d21b80851fa3c",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Tempearture3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temperature3",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1680,
+        "y": 2100,
+        "wires": [
+            [
+                "ef9122ab80a39bee"
+            ]
+        ]
+    },
+    {
+        "id": "46b6da2d331384d8",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Door and Window Contact Sensor Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 1490,
+        "y": 2500,
+        "wires": [
+            [
+                "58e5a5e08f61c58b"
+            ]
+        ]
+    },
+    {
+        "id": "58e5a5e08f61c58b",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W_Contact_Sensor Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 2020,
+        "y": 2340,
+        "wires": [
+            [
+                "f1104d2ed3b63ace"
+            ]
+        ]
+    },
+    {
+        "id": "f1104d2ed3b63ace",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "dandw3",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2010,
+        "y": 2080,
+        "wires": [
+            [
+                "ef9122ab80a39bee"
+            ]
+        ]
+    },
+    {
+        "id": "ef9122ab80a39bee",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 23",
+        "func": "var light1=flow.get('light1')||0;\nconsole.log('Light1',light1);\nvar dandw3=flow.get('dandw3')||0;\nconsole.log('D&W3',dandw3);\nvar temperature3=flow.get('temperature3')||0;\nconsole.log('Temperature3',temperature3);\nif(light1>7 && dandw3>7 && temperature3>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1750,
+        "y": 1820,
+        "wires": [
+            [
+                "c1a96ebf8b1f9dfe"
+            ]
+        ]
+    },
+    {
+        "id": "ee4337890647612a",
+        "type": "e-mail",
+        "z": "70bfac397f8bc5cd",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": true,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "fecprojectVIT@gmail.com",
+        "dname": "SECURITY ALERT!!!!!",
+        "x": 2720,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "b5422ec9247ddab0",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 24",
+        "func": "\nif(msg.payload.slice(17,21)=='True'){\n    console.log(msg.payload.slice(17,21));\nvar emailCount=flow.get('emailCount')||0;\nconsole.log(emailCount);\nif(emailCount<80){\n    emailCount+=1;\n    flow.set('emailSent',true);\n    flow.set('emailCount',emailCount);\n    return msg;\n}\n}\nelse{\n    console.log(msg.payload.slice(17,21));\n    flow.set('emailSent',false);\n}\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2690,
+        "y": 900,
+        "wires": [
+            [
+                "ee4337890647612a"
+            ]
+        ]
+    },
+    {
+        "id": "7d22852f3e0d3fd6",
+        "type": "sqlite",
+        "z": "70bfac397f8bc5cd",
+        "mydb": "8aa101fbb00d9bf3",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "SQL Database",
+        "x": 3960,
+        "y": 740,
+        "wires": [
+            [
+                "a86101556d437633"
+            ]
+        ]
+    },
+    {
+        "id": "228312c81c4dddf9",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 25",
+        "func": "if(msg.payload.slice(17,21)=='True'){\nvar emailCount=flow.get('emailCount')||0;\nvar serialNo=flow.get('SerialOutput')||0;\nvar initmation=flow.get('emailSent');\nvar output;\n\nif(initmation){\n    output='TRUE';\n}else{\n    output='FALSE';\n}\nif(emailCount==0){\n    msg.topic='CREATE TABLE Records(Serial_No INTEGER PRIMARY KEY, Object VARCHAR(100),Intimation VARCHAR(30));'\n}else{\n    msg.topic=`INSERT INTO Records VALUES(${serialNo},'${msg.payload.slice(23,29)}','${output}');`;\n    console.log(msg);\n}\nserialNo+=1;\nflow.set('SerialOutput',serialNo);\nreturn msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3250,
+        "y": 760,
+        "wires": [
+            [
+                "7d22852f3e0d3fd6"
+            ]
+        ]
+    },
+    {
+        "id": "a86101556d437633",
+        "type": "debug",
+        "z": "70bfac397f8bc5cd",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 4340,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "8c64861b240d31eb",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 2420,
+        "y": 2300,
+        "wires": [
+            [
+                "405d859c5f059451"
+            ]
+        ]
+    },
+    {
+        "id": "5c98b11061938534",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Door and Window Contact Sensor Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 2890,
+        "y": 2300,
+        "wires": [
+            [
+                "e4b185d792f5772e"
+            ]
+        ]
+    },
+    {
+        "id": "405d859c5f059451",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Temperature Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 2480,
+        "y": 2160,
+        "wires": [
+            [
+                "60c566c5abd2d35d"
+            ]
+        ]
+    },
+    {
+        "id": "e4b185d792f5772e",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W_Contact_Sensor Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 2820,
+        "y": 2140,
+        "wires": [
+            [
+                "f2e5622a03bb40b0"
+            ]
+        ]
+    },
+    {
+        "id": "60c566c5abd2d35d",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Tempearture4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temperature4",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2400,
+        "y": 2060,
+        "wires": [
+            [
+                "bb121ba318664e6f"
+            ]
+        ]
+    },
+    {
+        "id": "f2e5622a03bb40b0",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "D&W4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "dandw4",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2730,
+        "y": 2040,
+        "wires": [
+            [
+                "bb121ba318664e6f"
+            ]
+        ]
+    },
+    {
+        "id": "bb121ba318664e6f",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 26",
+        "func": "var temperature4=flow.get('temperature4')||0;\nconsole.log('Temperature4',temperature4);\nvar dandw4=flow.get('dandw4')||0;\nconsole.log('D&W4',dandw4);\nif(temperature4>7 && dandw4>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2550,
+        "y": 1860,
+        "wires": [
+            [
+                "c1a96ebf8b1f9dfe"
+            ]
+        ]
+    },
+    {
+        "id": "c1a96ebf8b1f9dfe",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 27",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 1700,
+        "wires": [
+            [
+                "ff60c8120b48854f"
+            ]
+        ]
+    },
+    {
+        "id": "dcae50a1558c1c4d",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detector",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 440,
+        "y": 960,
+        "wires": [
+            [
+                "d5c203b6336b09f6"
+            ]
+        ]
+    },
+    {
+        "id": "d57e5c7096db97ce",
+        "type": "presence-faker",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detection",
+        "onPayload": "true",
+        "onPayloadType": "bool",
+        "onTopic": "",
+        "offPayload": "false",
+        "offPayloadType": "bool",
+        "offTopic": "",
+        "windowBegin": "06:00",
+        "windowEnd": "23:59",
+        "minDurationHours": 0,
+        "minDurationMinutes": 0,
+        "minDurationSeconds": "1",
+        "minDuration": "1",
+        "maxDurationHours": 0,
+        "maxDurationMinutes": 0,
+        "maxDurationSeconds": "1",
+        "maxDuration": "1",
+        "minCount": "300",
+        "maxCount": "1000",
+        "startupBehavior": "onStartup",
+        "actionOnDisable": "none",
+        "firstBlockType": "off",
+        "lastBlockType": "off",
+        "isLoggingEnabled": false,
+        "x": 450,
+        "y": 1080,
+        "wires": [
+            [
+                "c59cabedb094034e"
+            ]
+        ]
+    },
+    {
+        "id": "d5c203b6336b09f6",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 660,
+        "y": 960,
+        "wires": [
+            [
+                "dfc2138fa8787e85"
+            ]
+        ]
+    },
+    {
+        "id": "c59cabedb094034e",
+        "type": "random",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound Detected Value",
+        "low": 1,
+        "high": 10,
+        "inte": "true",
+        "property": "payload",
+        "x": 680,
+        "y": 1080,
+        "wires": [
+            [
+                "03f247dc6fc9e4cb"
+            ]
+        ]
+    },
+    {
+        "id": "dfc2138fa8787e85",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Motion5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "motion5",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 960,
+        "wires": [
+            [
+                "0de52df45931d294"
+            ]
+        ]
+    },
+    {
+        "id": "03f247dc6fc9e4cb",
+        "type": "change",
+        "z": "70bfac397f8bc5cd",
+        "name": "Sound5",
+        "rules": [
+            {
+                "t": "set",
+                "p": "sound5",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 1080,
+        "wires": [
+            [
+                "0de52df45931d294"
+            ]
+        ]
+    },
+    {
+        "id": "0de52df45931d294",
+        "type": "function",
+        "z": "70bfac397f8bc5cd",
+        "name": "function 28",
+        "func": "var motion5=flow.get('motion5')||0;\nconsole.log('Motion5 ',motion5);\nvar sound5=flow.get('sound5')||0;\nconsole.log('Sound5 ',sound5);\nif(motion5>7 && sound5>7){\n    msg.payload=true;\n}else{\n    msg=false;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 1000,
+        "wires": [
+            [
+                "64a0a0895d2ecba4"
+            ]
+        ]
+    },
+    {
+        "id": "8aa101fbb00d9bf3",
+        "type": "sqlitedb",
+        "db": "C:\\Users\\aayus\\.node-red\\test.db",
+        "mode": "RWC"
+    }
+]
